@@ -1,7 +1,9 @@
 Propagation Kernels
 ===================
 
-A MATLAB implementation of the propagation graph kernel described in:
+A MATLAB implementation of the propagation graph kernel for general 
+graphs (propagation\_kernel.m) and grid graphs (propagation\_kernel_matrix). 
+The propagation kernel is described in:
 
 > Neumann, M. Patricia, N., Garnett, R., and Kersting, K. Efficient
 > Graph Kernels by Randomization. (2013). Machine Learning and
@@ -9,7 +11,7 @@ A MATLAB implementation of the propagation graph kernel described in:
 > 2012), pp. 378--392.
 
 This implementation supports arbitrary user-defined base kernels and
-transformations.
+transformations as well as neighborhoods for the grid version. 
 
 Usage
 -----
