@@ -1,4 +1,26 @@
-% MAKE_B creates a weighted symmetric filter matrix.
+% MAKE_B creates a weighted symmetric filter matrix encoding the
+% neighborhood for isotropic label diffusion. 
+%
+% Usage:
+% 
+% B = make_B(1,4);
+% Returns a 3 x 3 symmetric filter matrix encoding a 4-neighborhood 
+% corresponding to 4 equally spaced points on a 1 point radius of the 
+% center point.   
+%
+% B = make_B(2,16);
+% Returns a 5 x 5 symmetric filter matrix encoding 16 equally spaced points 
+% on a 2 point radius of the center point.  
+%
+% Inputs:
+%
+% radius: distance from the center point used to determine filter matrix.
+% num_points: number of neighbors used in the filter matrix.
+%
+% Output:
+%
+% B: filter matrix (approximately) encoding num_points equally spaced points 
+% on the speccified radius from the center point. 
 %
 % Copyright (c) Roman Garnett, 2012--2014.
 
