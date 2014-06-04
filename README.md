@@ -11,7 +11,8 @@ The propagation kernel is described in:
 > 2012), pp. 378--392.
 
 This implementation supports arbitrary user-defined base kernels and
-transformations as well as neighborhoods for the grid version. 
+transformations as well as arbitrary user-defined neighborhoods for the 
+grid version. 
 
 Usage
 -----
