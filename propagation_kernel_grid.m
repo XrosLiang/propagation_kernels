@@ -1,4 +1,4 @@
-% PROPAGATION_KERNEL_MATRIX calculates the propagation kernel between data
+% PROPAGATION_KERNEL_GRID calculates the propagation kernel between data
 % organized in grids.
 %
 % This function contains an implementation of the propagation kernel
@@ -80,7 +80,7 @@
 %
 % K: an (N x N) matrix containing the computed propagation kernel.
 %
-% See also CALCULATE_HASHES_MATRIX, LABEL_DIFFUSION_CONVOLUTION.
+% See also CALCULATE_HASHES_GRID, LABEL_DIFFUSION_CONVOLUTION.
 % 
 % 
 % Based on the implementation of propagation_kernel by
@@ -88,7 +88,7 @@
 %
 % Copyright (c) Marion Neumann, 2014.
 
-function K = propagation_kernel_matrix(A, transformation, ...
+function K = propagation_kernel_grid(A, transformation, ...
                                                 num_iterations, varargin)
   verbose = false;
   
