@@ -118,7 +118,7 @@ function K = propagation_kernel_grid(A, transformation, ...
 
     % hashing
     if (verbose); fprintf('...computing hashvalues\n'); end
-    hash_labels = calculate_hashes_matrix(A, options.distance, options.w);
+    hash_labels = calculate_hashes_grid(A, options.distance, options.w);
     
     % GET set of existing hash labels
     sth = cellfun(@(im) (unique(im(:))), hash_labels,'UniformOutput',false);
