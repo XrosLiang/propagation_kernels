@@ -1,4 +1,8 @@
+<<<<<<< HEAD:calculate_hashes_matrix.m
 % CALCULATE_HASHES_MATRIX computes locality sensitive hashes.
+=======
+% CALCULATE_HASHES_GRID compute locality sensitive hashes.
+>>>>>>> 079847cf15734954e280bd518335207013245630:calculate_hashes_grid.m
 %
 % This function computes a locality sensitive hash for features organized 
 % in a cell array of N matrices of size (n x m x d). The hashing procedure 
@@ -45,14 +49,14 @@
 % labels: a cell array of N matrices of size (m x n) containing the hashed 
 % features. 
 %
-% See also PROPAGATION_KERNEL_MATRIX.
+% See also PROPAGATION_KERNEL_GRID.
 %
 % Based on the implementation of calculate_hashes by
 % (c) Roman Garnett, 2012--2014.
 %
 % Copyright (c) Marion Neumann, 2014.
 
-function labels = calculate_hashes_matrix(A, distance, w)
+function labels = calculate_hashes_grid(A, distance, w)
     
   % A:  cell array of d-dim matrices  
   labels = cell(size(A));
