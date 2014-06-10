@@ -17,9 +17,9 @@
 % Outputs:
 %
 % inital_A: a cell array of N inital label distribution matrices of sizes 
-% (n x m x num_col) to use in propagation_kernel_matrix.
+% (n x m x num_col) to use in propagation_kernel_grid.
 %
-% See also PROPAGATION_KERNEL_MATRIX, LABEL_DIFFUSION_CONVOLUTION.
+% See also PROPAGATION_KERNEL_GRID, LABEL_DIFFUSION_CONVOLUTION.
 % 
 % 
 % Copyright (c) Marion Neumann, 2014.
