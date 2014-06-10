@@ -45,7 +45,7 @@
 % labels: a cell array of N matrices of size (m x n) containing the hashed 
 % features. 
 %
-% See also PROPAGATION_KERNEL_MATRIX.
+% See also PROPAGATION_KERNEL_GRID.
 %
 % Based on the implementation of calculate_hashes by
 % (c) Roman Garnett, 2012--2014.
