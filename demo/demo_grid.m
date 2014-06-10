@@ -30,6 +30,7 @@ toc
       
 
 % % KERNEL EVALUATION (libSVM Classification)
+% CAUTION: svmtrain.m in libSVM needs to be renamed to svmtrain_libsvm.m
 % fprintf('...svm evaluation\n')
 % addpath(genpath('/path/to/libsvm/'))
 % svm_options = @(c)(['-q -t 4 -c ' num2str(c)]);
