@@ -33,7 +33,7 @@
 %
 % Usage:
 %
-% K = propagation_kernel_matrix(A, transformation, num_iterations, varargin)
+% K = propagation_kernel_grid(A, transformation, num_iterations, varargin)
 %
 % Inputs:
 %
