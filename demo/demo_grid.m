@@ -5,12 +5,13 @@ addpath(genpath('../'));
 fprintf('...loading data\n')
 load('plant_diseases_demo')
 
+
 % NEIGHBOURHODD for diffusion
 B = make_B(1,4);    % 4-neighbourhood
 transformation = @(A) label_diffusion_convolution(A, B);
         
-% QUANTIZATION parameter and distribution intilialization
-num_col = 5; 
+% QUANTIZATION and DISTRIBUTION INITIALIZATION
+num_col = 5;    
 inital_A = prior_label_distributions_images(A,num_col);
 
 
@@ -35,7 +36,7 @@ toc
 % 
 % num_folds = 10; 
 % cost = 1;
-% c = cvpartition(numel(labels),'kfold',num_folds);  % generate data splits
+% c = cvpartition(numel(graph_labels),'kfold',num_folds);  % generate data splits
 % 
 % accurracies = zeros(num_folds, 1);
 % for i=1:num_folds
@@ -46,8 +47,8 @@ toc
 %     K_test = [(1:length(test_ind))' K(test_ind,train_ind)];
 % 
 %     % SVM prediciton
-%     model = svmtrain_libsvm(labels(train_ind),K_train, svm_options(cost));
-%     [y_pred, acc, ~] = svmpredict(labels(test_ind),K_test, model, '-q');
+%     model = svmtrain_libsvm(graph_labels(train_ind),K_train, svm_options(cost));
+%     [y_pred, acc, ~] = svmpredict(graph_labels(test_ind),K_test, model, '-q');
 %     accurracies(i) = acc(1);
 % end
 % fprintf('%d-fold CV accuracy (+/- stdv) = %2.2f (+/- %0.2f) \n',num_folds,mean(accurracies),std(accurracies))                     
