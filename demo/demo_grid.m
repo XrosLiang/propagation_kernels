@@ -24,7 +24,7 @@ rng(0);     % initialize random seed for reproducible results
 % COMPUTE propagation kernel for images with diffusion on pixel grid graphs
 fprintf('...propagation kernel computation\n')
 tic
-K = propagation_kernel_matrix(inital_A, transformation, num_iter, 'distance', distance, 'w', w);
+K = propagation_kernel_grid(inital_A, transformation, num_iter, 'distance', distance, 'w', w);
 toc                     
       
 
