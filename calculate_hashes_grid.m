@@ -21,7 +21,7 @@
 %
 % Usage:
 %
-% labels = calculate_hashes_matrix(A, distance, w)
+% labels = calculate_hashes_grid(A, distance, w)
 %
 % Inputs:
 %
