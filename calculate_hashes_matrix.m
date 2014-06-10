@@ -1,8 +1,8 @@
-% CALCULATE_HASHES_MATRIX compute locality sensitive hashes.
+% CALCULATE_HASHES_MATRIX computes locality sensitive hashes.
 %
 % This function computes a locality sensitive hash for features organized 
-% in a cell array of N matrices of size (n x m x d) in the manner described
-% in:
+% in a cell array of N matrices of size (n x m x d). The hashing procedure 
+% is described in:
 %
 % Neumann, M., Patricia, N., Garnett, R., and Kersting, K. Efficient
 % Graph Kernels by Randomization. (2012). Machine Learning And
