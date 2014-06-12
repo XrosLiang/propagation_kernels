@@ -65,7 +65,7 @@
 %                'l1': \ell^1
 %                'l2': \ell^2
 %                'tv': total variation distance (equivalent to \ell^1)
-%         'hellinger': Hellinger distance
+%                'hellinger': Hellinger distance
 %
 %                 The input is not case sensitive. See
 %                 calculate_hashes for more information.
@@ -84,6 +84,15 @@
 %                  linear one:
 %
 %                    @(counts) (counts * counts');
+%
+%   'attr'
+%
+%   'dist_attr'
+%
+%   'w_attr'
+%
+%   'trans_attr'
+%
 %
 % Outputs:
 %
@@ -112,9 +121,25 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
                       @(counts) (counts * counts'), ...
                       @(x) (isa(x, 'function_handle')));
 
+  % inputs for attributed graphs (attributes or attribute distributions,  
+  % LSH distance and bin width, transformation)               
+  options.addOptional('attr', [], ...
+                      @(x) (ismatrix(x)));  
+  options.addOptional('dist_attr', 'l1', ...
+                      @(x) ismember(lower(x), {'l1', 'l2', 'tv', 'hellinger'}));  
+  options.addOptional('w_attr', 1, ...
+                      @(x) (isscalar(x) && (x > 0)));            
+  options.addOptional('trans_attr', @(x) (x), ...
+                      @(x) (isa(x, 'function_handle'))); 
+   
+                  
   options.parse(varargin{:});
   options = options.Results;
 
+  if ~isempty(options.attr)
+      attributes = options.attr;    % attributes or attribute distributions
+  end
+  
   num_graphs = max(graph_ind);
 
   % initialize output
@@ -122,22 +147,54 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
 
   iteration = 0;
   while (true)
+    % hash label distributions
     labels = calculate_hashes(features, options.distance, options.w);
 
-    % aggregate counts on graphs
-    counts = accumarray([graph_ind, labels], 1);
+    
+    if ~isempty(options.attr)    
+       
+        % hash each attribute dimension seperately or hash marginal attribute distributions 
+        for dim = 1:size(attributes,2)
+            tmp = calculate_hashes(attributes(:,dim), options.dist_attr, 1);
+            [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
 
-    % contribution specified by base kernel on count vectors
-    K = K + options.base_kernel(counts);
+            % aggregate counts on graphs
+            counts = accumarray([graph_ind, labels_new], 1);    
+            
+            % contribution specified by base kernel on count vectors
+            K = K + options.base_kernel(counts);    
+        end
+        
+%         % hash attributes jointly or hash joint attribute distributions
+%         tmp = calculate_hashes(attributes, options.dist_attr, options.w_attr);
+%        
+%         [~,~,labels] =  unique(labels+(tmp*max(labels)));
+%
+%         % aggregate counts on graphs
+%         counts = accumarray([graph_ind, labels], 1);    
+%         
+%         % contribution specified by base kernel on count vectors
+%         K = K + options.base_kernel(counts);    
+    else
+        % aggregate counts on graphs
+        counts = accumarray([graph_ind, labels], 1);
+
+        % contribution specified by base kernel on count vectors
+        K = K + options.base_kernel(counts);
+    end
+    
 
     % avoid unnecessary transformation on last iteration
     if (iteration == num_iterations)
       break;
     end
 
-    % apply transformation to features for next step
+    % apply transformation to label distribution features for next step
     features = transformation(features);
 
+    % apply transformation to attribute distributions for next step
+    attributes = options.trans_attr(attributes);
+    
     iteration = iteration + 1;
   end
 
