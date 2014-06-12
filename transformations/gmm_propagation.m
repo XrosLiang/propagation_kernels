@@ -1,3 +1,6 @@
+
+% Copyright (c) Roman Garnett, 2012--2014.
+
 function features = gmm_propagation(A, mus, sigmas, x)
 
   persistent weights;
