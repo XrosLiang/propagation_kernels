@@ -21,4 +21,4 @@ Add the directory to your MATLAB path and use `help
 propagation_kernel` to view the documentation. 3 simple demos 
 in the `demo/` directory show the kernel computation for labeled graphs 
 (demo.m), attributed graphs (demo_p2k.m) 
-and grid graphs, i.e., graphs of regular neighborhood structre, (demo_grid.m). 
+and grid graphs, i.e., graphs of regular neighborhood structure, (demo_grid.m). 
