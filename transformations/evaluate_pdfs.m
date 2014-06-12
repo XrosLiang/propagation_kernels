@@ -1,3 +1,6 @@
+
+% Copyright (c) Roman Garnett, 2012--2014.
+
 function pdfs = evaluate_pdfs(mus, Ks, x, weights)
 
   persistent individual_pdfs;
