@@ -100,7 +100,7 @@
 %
 % See also CALCULATE_HASHES, LABEL_DIFFUSION, LABEL_PROPAGATION.
 
-% Copyright (c) Roman Garnett, 2012--2014.
+% Copyright (c) Roman Garnett, Marion Neumann 2012--2014.
 
 function K = propagation_kernel(features, graph_ind, transformation, ...
                                 num_iterations, varargin)
