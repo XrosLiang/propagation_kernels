@@ -138,6 +138,8 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
 
   if ~isempty(options.attr)
       attributes = options.attr;    % attributes or attribute distributions
+  else
+      attributes = 1;               % this is just a dummy
   end
   
   num_graphs = max(graph_ind);
