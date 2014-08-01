@@ -136,8 +136,12 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
   options.parse(varargin{:});
   options = options.Results;
 
+  if ~isempty(options.attr)
+      attributes = options.attr;    % attributes or attribute distributions
+  else
+      attributes = 1;               % this is just a dummy
+  end
 
-  attributes = options.attr;    % attributes or attribute distributions
   
   num_graphs = max(graph_ind);
 
