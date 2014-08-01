@@ -136,14 +136,14 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
   options.parse(varargin{:});
   options = options.Results;
 
-  if ~isempty(options.attr)
-      attributes = options.attr;    % attributes or attribute distributions
-  end
+
+  attributes = options.attr;    % attributes or attribute distributions
   
   num_graphs = max(graph_ind);
 
   % initialize output
   K = zeros(num_graphs);
+  K_all = zeros(num_graphs,num_graphs,num_iterations+1);  
 
   iteration = 0;
   while (true)
@@ -153,28 +153,28 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
     
     if ~isempty(options.attr)    
        
-        % hash each attribute dimension seperately or hash marginal attribute distributions 
-        for dim = 1:size(attributes,2)
-            tmp = calculate_hashes(attributes(:,dim), options.dist_attr, 1);
-            [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
-
-            % aggregate counts on graphs
-            counts = accumarray([graph_ind, labels_new], 1);    
-            
-            % contribution specified by base kernel on count vectors
-            K = K + options.base_kernel(counts);    
-        end
+%         % hash each attribute dimension seperately (ONLY if attributes are NOT propagated)
+%         for dim = 1:size(attributes,2)
+%             tmp = calculate_hashes(attributes(:,dim), options.dist_attr, options.w_attr);
+%             [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
+% 
+%             % aggregate counts on graphs
+%             counts = accumarray([graph_ind, labels_new], 1);    
+%             
+%             % contribution specified by base kernel on count vectors
+%             K = K + options.base_kernel(counts);    
+%         end
         
-%         % hash attributes jointly or hash joint attribute distributions
-%         tmp = calculate_hashes(attributes, options.dist_attr, options.w_attr);
-%        
-%         [~,~,labels] =  unique(labels+(tmp*max(labels)));
-%
-%         % aggregate counts on graphs
-%         counts = accumarray([graph_ind, labels], 1);    
-%         
-%         % contribution specified by base kernel on count vectors
-%         K = K + options.base_kernel(counts);    
+        % hash attributes jointly or hash joint attribute distributions
+        tmp = calculate_hashes(attributes, options.dist_attr, options.w_attr);
+       
+        [~,~,labels] =  unique(labels+(tmp*max(labels)));
+
+        % aggregate counts on graphs
+        counts = accumarray([graph_ind, labels], 1);    
+        
+        % contribution specified by base kernel on count vectors
+        K = K + options.base_kernel(counts);    
     else
         % aggregate counts on graphs
         counts = accumarray([graph_ind, labels], 1);
@@ -183,7 +183,7 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
         K = K + options.base_kernel(counts);
     end
     
-
+    K_all(:,:,iteration+1) = K;
     % avoid unnecessary transformation on last iteration
     if (iteration == num_iterations)
       break;
@@ -197,5 +197,7 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
     
     iteration = iteration + 1;
   end
-
+  
+  % RETURN K_all
+  K = K_all;
 end
