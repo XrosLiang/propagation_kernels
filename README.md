@@ -5,6 +5,12 @@ A MATLAB implementation of the propagation graph kernel for general
 graphs (propagation\_kernel.m) and grid graphs (propagation\_kernel\_grid.m). 
 The propagation kernel is described in:
 
+> Marion Neumann, Roman Garnett, Christian Bauckhage, Kristian Kersting.
+> Propagation kernels: efficient graph kernels from propagated information. (2015). 
+> Machine Learning. 102 (2), pp. 209-245. 
+
+and
+
 > Neumann, M. Patricia, N., Garnett, R., and Kersting, K. Efficient
 > Graph Kernels by Randomization. (2013). Machine Learning and
 > Knowledge Discovery in Databases: European Conference (ECML/PKDD
