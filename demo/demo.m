@@ -1,5 +1,5 @@
 rng('default');
-
+addpath(genpath('..'));
 % transformation parameters
 num_train      = 1e3;    % number of nodes to use for the training set
 
@@ -42,7 +42,7 @@ K = propagation_kernel(initial_features, graph_ind, transformation, ...
 figure;
 set(gcf, 'color', 'white');
 subplot(1, 2, 1);
-imagesc(K);
+imagesc(K(:,:,end));
 axis('square');
 title('linear kernel');
 colorbar;
@@ -63,7 +63,7 @@ K = propagation_kernel(initial_features, graph_ind, transformation, ...
                        'base_kernel', base_kernel);
 
 subplot(1, 2, 2);
-imagesc(K);
+imagesc(K(:,:,end));
 axis('square');
 title('RBF kernel');
 colorbar;
