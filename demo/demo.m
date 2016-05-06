@@ -1,6 +1,8 @@
 rng('default');
 addpath(genpath('..'));
-% transformation parameters
+% this is to illustrate the use of PARTIALLY LABELED graphs
+% (missing node information) 
+% DO USE ALL NODE LABELS IF AVAILABLE
 num_train      = 1e3;    % number of nodes to use for the training set
 
 % propagation kernel parameters
