@@ -157,7 +157,7 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
     
     if ~isempty(options.attr)    
        
-        % hash each attribute dimension seperately 
+        % hash each attribute dimension separately 
         for dim = 1:size(attributes,2)
             tmp = calculate_hashes(attributes(:,dim), options.dist_attr, options.w_attr);
             [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
