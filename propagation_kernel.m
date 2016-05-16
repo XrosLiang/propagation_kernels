@@ -4,9 +4,15 @@
 % kernel described in:
 %
 %   Neumann, M., Patricia, N., Garnett, R., and Kersting, K. Efficient
-%   Graph Kernels by Randomization. (2012). Machine Learning And
+%   Graph Kernels by Randomization. 2012. Machine Learning And
 %   Knowledge Discovery in Databases: European Conference, (ECML/PKDD
 %   2012), pp. 378-392.
+%
+% and
+%   Neumann, M., Garnett, R., Bauckhage, C. and Kersting, K. 2016. 
+%   Propagation kernels: efficient graph kernels from propagated 
+%   information. Machine Learning, 102(2), pp.209-245.
+%
 %
 % This implementation supports (approximately) preserving any of the
 % following distances between the feature vectors:
@@ -157,7 +163,7 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
     
     if ~isempty(options.attr)    
        
-        % hash each attribute dimension separately 
+        % hash each attribute dimension individually (used in MLJ paper) 
         for dim = 1:size(attributes,2)
             tmp = calculate_hashes(attributes(:,dim), options.dist_attr, options.w_attr);
             [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
