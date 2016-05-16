@@ -157,28 +157,28 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
     
     if ~isempty(options.attr)    
        
-%         % hash each attribute dimension seperately (ONLY if attributes are NOT propagated)
-%         for dim = 1:size(attributes,2)
-%             tmp = calculate_hashes(attributes(:,dim), options.dist_attr, options.w_attr);
-%             [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
-% 
-%             % aggregate counts on graphs
-%             counts = accumarray([graph_ind, labels_new], 1);    
-%             
-%             % contribution specified by base kernel on count vectors
-%             K = K + options.base_kernel(counts);    
-%         end
-        
-        % hash attributes jointly or hash joint attribute distributions
-        tmp = calculate_hashes(attributes, options.dist_attr, options.w_attr);
-       
-        [~,~,labels] =  unique(labels+(tmp*max(labels)));
+        % hash each attribute dimension seperately 
+        for dim = 1:size(attributes,2)
+            tmp = calculate_hashes(attributes(:,dim), options.dist_attr, options.w_attr);
+            [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
 
-        % aggregate counts on graphs
-        counts = accumarray([graph_ind, labels], 1);    
+            % aggregate counts on graphs
+            counts = accumarray([graph_ind, labels_new], 1);    
+            
+            % contribution specified by base kernel on count vectors
+            K = K + options.base_kernel(counts);    
+        end
         
-        % contribution specified by base kernel on count vectors
-        K = K + options.base_kernel(counts);    
+%         % hash attributes jointly 
+%         tmp = calculate_hashes(attributes, options.dist_attr, options.w_attr);
+%         [~,~,labels] =  unique(labels+(tmp*max(labels)));
+% 
+%         % aggregate counts on graphs
+%         counts = accumarray([graph_ind, labels], 1);    
+%         
+%         % contribution specified by base kernel on count vectors
+%         K = K + options.base_kernel(counts);    
+
     else
         % aggregate counts on graphs
         counts = accumarray([graph_ind, labels], 1);
