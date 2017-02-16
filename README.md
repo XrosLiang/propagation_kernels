@@ -24,7 +24,7 @@ Usage
 -----
 
 Add the directory to your MATLAB path and use `help
-propagation_kernel` to view the documentation. 3 simple demos 
-in the `demo/` directory show the kernel computation for labeled graphs 
+propagation_kernel` to view the documentation. A simple demo  `run_default_PK.m` 
+in the `demo/` directory shows how the setup the parameters and run the kernel computation with defaults for labeled graphs. Further demoas show how to run the kernel with other than default settings for partially labaled graphs 
 (demo.m), attributed graphs (demo_p2k.m) 
 and grid graphs, i.e., graphs of regular neighborhood structure, (demo_grid.m). 
