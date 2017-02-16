@@ -4,9 +4,15 @@
 % kernel described in:
 %
 %   Neumann, M., Patricia, N., Garnett, R., and Kersting, K. Efficient
-%   Graph Kernels by Randomization. (2012). Machine Learning And
+%   Graph Kernels by Randomization. 2012. Machine Learning And
 %   Knowledge Discovery in Databases: European Conference, (ECML/PKDD
 %   2012), pp. 378-392.
+%
+% and
+%   Neumann, M., Garnett, R., Bauckhage, C. and Kersting, K. 2016. 
+%   Propagation kernels: efficient graph kernels from propagated 
+%   information. Machine Learning, 102(2), pp.209-245.
+%
 %
 % This implementation supports (approximately) preserving any of the
 % following distances between the feature vectors:
@@ -157,28 +163,28 @@ function K = propagation_kernel(features, graph_ind, transformation, ...
     
     if ~isempty(options.attr)    
        
-%         % hash each attribute dimension seperately (ONLY if attributes are NOT propagated)
-%         for dim = 1:size(attributes,2)
-%             tmp = calculate_hashes(attributes(:,dim), options.dist_attr, options.w_attr);
-%             [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
-% 
-%             % aggregate counts on graphs
-%             counts = accumarray([graph_ind, labels_new], 1);    
-%             
-%             % contribution specified by base kernel on count vectors
-%             K = K + options.base_kernel(counts);    
-%         end
-        
-        % hash attributes jointly or hash joint attribute distributions
-        tmp = calculate_hashes(attributes, options.dist_attr, options.w_attr);
-       
-        [~,~,labels] =  unique(labels+(tmp*max(labels)));
+        % hash each attribute dimension individually (used in MLJ paper) 
+        for dim = 1:size(attributes,2)
+            tmp = calculate_hashes(attributes(:,dim), options.dist_attr, options.w_attr);
+            [~,~,labels_new] =  unique(labels+(tmp*max(labels)));
 
-        % aggregate counts on graphs
-        counts = accumarray([graph_ind, labels], 1);    
+            % aggregate counts on graphs
+            counts = accumarray([graph_ind, labels_new], 1);    
+            
+            % contribution specified by base kernel on count vectors
+            K = K + options.base_kernel(counts);    
+        end
         
-        % contribution specified by base kernel on count vectors
-        K = K + options.base_kernel(counts);    
+%         % hash attributes jointly 
+%         tmp = calculate_hashes(attributes, options.dist_attr, options.w_attr);
+%         [~,~,labels] =  unique(labels+(tmp*max(labels)));
+% 
+%         % aggregate counts on graphs
+%         counts = accumarray([graph_ind, labels], 1);    
+%         
+%         % contribution specified by base kernel on count vectors
+%         K = K + options.base_kernel(counts);    
+
     else
         % aggregate counts on graphs
         counts = accumarray([graph_ind, labels], 1);
