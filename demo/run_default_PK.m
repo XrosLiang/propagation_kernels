@@ -39,7 +39,10 @@ K = propagation_kernel(initial_label_distributions, graph_ind, transformation, .
                        'distance', distance, ...
                        'w',        w);
 
-% K contains PKs for ALL ITERATIONS UP TO num_iterations
+% K is a (m x m x num_iterations+1) array containing PKs for ALL ITERATIONS 
+% UP TO num_iterations (m is the number of graphs). Note that K(:,:,1) 
+% corresponds to the 0-th iteration, where we only look at node labels (no 
+% propgataion yet)
 K = K(:,:,end);     % PK for the last iteration 
                    
 

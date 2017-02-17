@@ -102,9 +102,12 @@
 %
 % Outputs:
 %
-%   K: (m x m x num_iterations) matrix containing the computed 
+%   K: (m x m x num_iterations+1) matrix containing the computed 
 %      propagation kernels for all iterations up to num_iterations. Use 
-%      K(:,:,end) to get PK for the last iteration. 
+%      K(:,:,end) to get PK for the last iteration. Note that K(:,:,1) 
+%      corresponds to the 0-th iteration taking only node infrmation into 
+%      account - no graph structure.
+
 %
 % See also CALCULATE_HASHES, LABEL_DIFFUSION, LABEL_PROPAGATION.
 
