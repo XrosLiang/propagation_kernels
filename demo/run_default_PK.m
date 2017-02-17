@@ -16,8 +16,15 @@ distance       = 'tv';  % distance to approximately preserve
 % load you dataset HERE
 load('mutag_mat');      
 
-num_nodes   = size(A, 1);
-num_classes = max(labels);
+num_nodes   = size(A, 1);   % number graphs
+num_classes = max(labels);  % number of node label classes
+
+
+% row-normalize adjacecny matrix A
+row_sum = sum(A, 2);
+row_sum(row_sum==0)=1;  % avoid dividing by zero => disconnected nodes
+A = bsxfun(@times, A, 1 ./ row_sum);
+
 
 initial_label_distributions = accumarray([(1:num_nodes)', labels], 1, [num_nodes, num_classes]);
 
