@@ -1,7 +1,7 @@
 % %
 % Setup default values and run PK computation. Note that the kernel will
-% perform BETTER if you learn the parameter via cross validation instead of
-% using these defualts. 
+% perform BETTER if you learn the parameters via cross validation instead of
+% using these defaults. 
 % 
 % Marion Neumann (m.neumann@wustl.edu)
 % % 
