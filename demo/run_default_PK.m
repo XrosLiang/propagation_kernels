@@ -39,6 +39,9 @@ K = propagation_kernel(initial_label_distributions, graph_ind, transformation, .
                        'distance', distance, ...
                        'w',        w);
 
+% K contains PKs for ALL ITERATIONS UP TO num_iterations
+K = K(:,:,end);     % PK for the last iteration 
+                   
 
 % % If you want to set the BASE KERNEL to an RBF kernel instead of the default 
 % % linear base kernel, use the following.
