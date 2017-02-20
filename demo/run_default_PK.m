@@ -16,7 +16,7 @@ distance       = 'tv';  % distance to approximately preserve
 % load you dataset HERE
 load('mutag_mat');      
 
-num_nodes   = size(A, 1);   % number graphs
+num_nodes   = size(A, 1);   % number nodes
 num_classes = max(labels);  % number of node label classes
 
 
